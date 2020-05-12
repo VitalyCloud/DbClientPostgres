@@ -2,7 +2,7 @@ import DataBase.DishMenu.DishMenuService;
 
 import java.sql.SQLException;
 
-public class Main {
+public class MainTesting {
     public static void main(String[] args) {
         DishMenuService dishMenuService;
         try {
@@ -18,5 +18,6 @@ public class Main {
         service.getIngredients().forEach((item) -> System.out.println(item));
         service.getCompositions().forEach((item) -> System.out.println(item));
         service.getDishes().forEach((item) -> System.out.println(item));
+        service.getCaloriesInPortion().forEach((item) -> System.out.println(item));
     }
 }

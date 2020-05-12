@@ -1,14 +1,17 @@
 package DataBase.DishMenu.Model;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class CaloriesInPortion {
-    String dishName;
-    int weight;
-    int calories;
+    SimpleStringProperty dishName;
+    SimpleIntegerProperty weight;
+    SimpleIntegerProperty calories;
 
     public CaloriesInPortion(String dishName, int weight, int calories) {
-        this.dishName = dishName;
-        this.weight = weight;
-        this.calories = calories;
+        this.dishName = new SimpleStringProperty(dishName);
+        this.weight = new SimpleIntegerProperty(weight);
+        this.calories = new SimpleIntegerProperty(calories);
     }
 
     @Override
@@ -21,26 +24,38 @@ public class CaloriesInPortion {
     }
 
     public String getDishName() {
+        return dishName.get();
+    }
+
+    public SimpleStringProperty dishNameProperty() {
         return dishName;
     }
 
     public void setDishName(String dishName) {
-        this.dishName = dishName;
+        this.dishName.set(dishName);
     }
 
     public int getWeight() {
+        return weight.get();
+    }
+
+    public SimpleIntegerProperty weightProperty() {
         return weight;
     }
 
     public void setWeight(int weight) {
-        this.weight = weight;
+        this.weight.set(weight);
     }
 
     public int getCalories() {
+        return calories.get();
+    }
+
+    public SimpleIntegerProperty caloriesProperty() {
         return calories;
     }
 
     public void setCalories(int calories) {
-        this.calories = calories;
+        this.calories.set(calories);
     }
 }

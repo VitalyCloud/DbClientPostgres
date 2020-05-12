@@ -12,6 +12,8 @@ import java.util.List;
 public class DishMenuService {
     DataBaseManager db;
 
+    //Get tables methods
+
     public DishMenuService() throws SQLException {
         db =  new DataBaseManager(new DishMenuConnectionURL());
     }
@@ -100,6 +102,25 @@ public class DishMenuService {
         });
         return dishes;
     }
+
+    public List<CaloriesInPortion> getCaloriesInPortion() {
+        List<CaloriesInPortion> resultList = new ArrayList<>();
+        executeSelect("select * from CaloriesInPortion", (result) -> {
+            try {
+                String name = result.getString(1);
+                int weight = result.getInt(2);
+                int calories = result.getInt(3);
+                resultList.add(new CaloriesInPortion(
+                        parseString(name),
+                        weight,
+                        calories
+                ));
+            } catch (SQLException ex) {}
+        });
+        return resultList;
+    }
+
+    //Helper Classes
 
     private String parseString(String str) {
         return str == null ? "null" : str.strip();
