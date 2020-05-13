@@ -76,20 +76,36 @@ String sqlQuery = "select * from dish where stuff like '%"+stuffToSearch+"%'";
 ### Таблицы базы данных
 Dish
 
+![Dish](https://github.com/VitalyCloud/DbClientPostgres/blob/master/Screenshots/DishTable.png)
+
+
 DishTypes
+
+![DishTypes](https://github.com/VitalyCloud/DbClientPostgres/blob/master/Screenshots/DishTypesTable.png)
 
 Ingredients
 
+![Ingredients](https://github.com/VitalyCloud/DbClientPostgres/blob/master/Screenshots/IngredientsTable.png)
+
 Composition
 
+![Composition](https://github.com/VitalyCloud/DbClientPostgres/blob/master/Screenshots/CompositionTable.png)
 
 ### Приложение 
 
 Главный экран
 
+![Главный экран](https://github.com/VitalyCloud/DbClientPostgres/blob/master/Screenshots/MainWindow.png)
+
 Калории/порция
+
+![Калории/порция](https://github.com/VitalyCloud/DbClientPostgres/blob/master/Screenshots/CaloriesInPortion.png)
 
 Состав блюда
 
+![Состав блюда](https://github.com/VitalyCloud/DbClientPostgres/blob/master/Screenshots/DishCompositionCesar.png)
+
 Оборудование->Блюда
+
+![Оборудование->Блюда](https://github.com/VitalyCloud/DbClientPostgres/blob/master/Screenshots/StuffToDish.png)
 
