@@ -110,7 +110,8 @@ public class DishMenuService {
 
     public List<CaloriesInPortion> getCaloriesInPortion() {
         List<CaloriesInPortion> resultList = new ArrayList<>();
-        executeSelect("select * from CaloriesInPortion", (result) -> {
+        String sqlQuery = "select * from CaloriesInPortion";
+        executeSelect(sqlQuery, (result) -> {
             try {
                 String name = result.getString(1);
                 int weight = result.getInt(2);
