@@ -22,4 +22,10 @@ public class ButtonFactory {
 
         return button;
     }
+
+    public static Button returnButton() {
+        return new Button("Return");
+    }
+
+    public static Button searchButton() {return  new Button("Search"); }
 }
