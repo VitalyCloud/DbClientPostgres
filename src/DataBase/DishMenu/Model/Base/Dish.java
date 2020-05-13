@@ -1,14 +1,10 @@
-package DataBase.DishMenu.Model;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+package DataBase.DishMenu.Model.Base;
 
 public class Dish {
     int id;
     String name;
     DishType type;
-    int totalWeight;
+    double totalWeight;
     int portionCount;
     String season;
     String stuff;
@@ -16,7 +12,7 @@ public class Dish {
     String timeToCook;
     String recipe;
 
-    public Dish(int id, String name, DishType type, int totalWeight,
+    public Dish(int id, String name, DishType type, double totalWeight,
                 int portionCount, String season, String stuff,
                 int calories, String timeToCook, String recipe) {
         this.id = id;
@@ -71,7 +67,7 @@ public class Dish {
         this.type = type;
     }
 
-    public int getTotalWeight() {
+    public double getTotalWeight() {
         return totalWeight;
     }
 

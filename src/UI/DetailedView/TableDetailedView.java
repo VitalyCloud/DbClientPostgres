@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,7 @@ public class TableDetailedView {
         searchButton.setOnAction(e -> {
             List<String> fieldsToString = new ArrayList<>();
             textFields.forEach((item) -> {
+                System.out.println(item.getText());
                 fieldsToString.add(item.getText());
             });
             action.performAction(fieldsToString);

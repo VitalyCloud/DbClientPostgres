@@ -1,4 +1,4 @@
-package DataBase.DishMenu.Model;
+package DataBase.DishMenu.Model.Base;
 
 public class Composition {
     int dish;

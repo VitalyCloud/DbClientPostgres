@@ -1,4 +1,4 @@
-package DataBase.DishMenu.Model;
+package DataBase.DishMenu.Model.Base;
 
 public class DishType {
     String type;
@@ -9,9 +9,7 @@ public class DishType {
 
     @Override
     public String toString() {
-        return "DishType{" +
-                "type='" + type + '\'' +
-                '}';
+        return type;
     }
 
     public String getType() {

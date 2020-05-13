@@ -2,6 +2,10 @@ package DataBase.DishMenu;
 
 import DataBase.DataBaseManager;
 import DataBase.DishMenu.Model.*;
+import DataBase.DishMenu.Model.Base.Composition;
+import DataBase.DishMenu.Model.Base.Dish;
+import DataBase.DishMenu.Model.Base.DishType;
+import DataBase.DishMenu.Model.Base.Ingredient;
 import DataBase.ResultHandler;
 
 import java.sql.ResultSet;
@@ -36,7 +40,7 @@ public class DishMenuService {
     public List<Ingredient> getIngredients() {
         List<Ingredient> ingredients = new ArrayList<>();
 
-        executeSelect("select * from ingredients", (result) -> {
+        executeSelect("select * from ingredients where", (result) -> {
             try {
                 int id = result.getInt(1);
                 String name = result.getString(2);
@@ -50,6 +54,7 @@ public class DishMenuService {
 
         return ingredients;
     }
+
 
     public List<Composition> getCompositions() {
         List<Composition> compositions = new ArrayList<>();
@@ -77,7 +82,7 @@ public class DishMenuService {
                 int id = result.getInt(1);
                 String name = result.getString(2);
                 String typeString = result.getString(3);
-                int totalWeight = result.getInt(4);
+                double totalWeight = result.getDouble(4);
                 int portionCount = result.getInt(5);
                 String season = result.getString(6);
                 String stuff = result.getString(7);
@@ -118,6 +123,66 @@ public class DishMenuService {
             } catch (SQLException ex) {}
         });
         return resultList;
+    }
+
+    public List<DishComposition> getIngredients(String dishName) {
+        String sqlQuery =
+                "select Ingredients.name, Ingredients.info, Composition.count, Composition.unitType " +
+                "from Composition " +
+                "INNER JOIN Ingredients on Ingredients.id = Composition.ingredient and " +
+                "Composition.dish = (select Dish.id from Dish where Dish.name = '"+ dishName +"');";
+
+        List<DishComposition> resultList = new ArrayList<>();
+        executeSelect(sqlQuery, (result) -> {
+            try {
+                String name = result.getString(1);
+                String info = result.getString(2);
+                int count = result.getInt(3);
+                String unitType =  result.getString(4);
+
+                resultList.add(new DishComposition(
+                        parseString(name),
+                        parseString(info),
+                        count,
+                        parseString(unitType)
+                ));
+            } catch (SQLException ex) {}
+        });
+        return resultList;
+    }
+
+    public List<Dish> getDishesWithStuff(String stuffToSearch) {
+        String sqlQuery = "select * from dish where stuff like '%"+stuffToSearch+"%'";
+        List<Dish> dishes = new ArrayList<>();
+        executeSelect(sqlQuery, (result) -> {
+            try {
+                int id = result.getInt(1);
+                String name = result.getString(2);
+                String typeString = result.getString(3);
+                double totalWeight = result.getDouble(4);
+                int portionCount = result.getInt(5);
+                String season = result.getString(6);
+                String stuff = result.getString(7);
+                int calories = result.getInt(8);
+                String timeToCook = result.getString(9);
+                String recipe = result.getString(10);
+
+                DishType type = new DishType(parseString(typeString));
+                Dish dish = new Dish(
+                        id,
+                        parseString(name),
+                        type,
+                        totalWeight, portionCount,
+                        parseString(season),
+                        parseString(stuff),
+                        calories,
+                        parseString(timeToCook),
+                        parseString(recipe)
+                );
+                dishes.add(dish);
+            }catch (SQLException ex) {}
+        });
+        return dishes;
     }
 
     //Helper Classes

@@ -1,7 +1,9 @@
 package UI;
 
 import DataBase.DishMenu.DishMenuService;
+import DataBase.DishMenu.Model.Base.Dish;
 import DataBase.DishMenu.Model.CaloriesInPortion;
+import DataBase.DishMenu.Model.DishComposition;
 import UI.DetailedView.DetailedView;
 import UI.DetailedView.ReturnButtonAction;
 import UI.DetailedView.TableDetailedView;
@@ -75,7 +77,31 @@ public class MainWindow implements ReturnButtonAction {
             TableDetailedView tdView = new TableDetailedView(fields);
             tdView.setOnSearchButtonAction((fieldsResult)->{
                 //Perform search
+                if(!fieldsResult.get(0).isEmpty()) {
+                    String name = fieldsResult.get(0);
+                    List<DishComposition> values = db.getIngredients(name);
+                    TableView<DishComposition> table = TableViewFactory.dishComposition(values);
+                    tdView.setTable(table);
+                }
+            });
+            showDetailedView(tdView.getMainPane());
+        });
 
+        //Кнопка Оборудование->Блюда
+        Button stuffToDishes = new ButtonFactory().menuButton();
+        stuffToDishes.setText("Оборудование->Блюда");
+        buttonsPane.getChildren().add(stuffToDishes);
+        stuffToDishes.setOnAction(e -> {
+            String fields[] = {"Название оборудования"};
+            TableDetailedView tdView = new TableDetailedView(fields);
+            tdView.setOnSearchButtonAction((fieldsResult)->{
+                //Perform search
+                if(!fieldsResult.get(0).isEmpty()) {
+                    String name = fieldsResult.get(0);
+                    List<Dish> values = db.getDishesWithStuff(name);
+                    TableView<Dish> table = TableViewFactory.dish(values);
+                    tdView.setTable(table);
+                }
             });
             showDetailedView(tdView.getMainPane());
         });
